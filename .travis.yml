@@ -1,0 +1,23 @@
+language: python
+
+python:
+    - "3.5"
+    - "3.5-dev"
+    - "3.6"
+    - "3.6-dev"
+    - "3.7-dev"
+    - "nightly"
+
+env:
+    - DJANGO_VERSION=1.7.11
+    - DJANGO_VERSION=1.8.17
+    - DJANGO_VERSION=1.9.12
+    - DJANGO_VERSION=1.10.6
+
+
+install:
+    - pip install -q Django==$DJANGO_VERSION
+    - python setup.py -q install
+
+script: pytest
+
