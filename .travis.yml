@@ -18,6 +18,7 @@ env:
 
 install:
     - pip install -q Django==$DJANGO_VERSION
+    - cp monkey_pdns/settings.example.py monkey_pdns/settings.py
     - python manage.py migrate
 
 script: 
