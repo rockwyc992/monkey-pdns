@@ -23,7 +23,7 @@ install:
     - python manage.py migrate
 
 script: 
-    - coverage run python manage.py test
+    - coverage run manage.py test
 
 after_success:
     - coveralls
