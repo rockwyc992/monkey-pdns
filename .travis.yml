@@ -19,6 +19,7 @@ env:
 install:
     - pip install -q Django==$DJANGO_VERSION
     - pip install coveralls
+    - pip install codecov
     - cp monkey_pdns/settings.example.py monkey_pdns/settings.py
     - python manage.py migrate
 
@@ -27,6 +28,7 @@ script:
 
 after_success:
     - coveralls
+    - codecov
 
 addons:
     code_climate:
