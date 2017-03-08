@@ -1,5 +1,7 @@
 language: python
 
+cache: pip
+
 python:
     - "3.5"
     - "3.5-dev"
@@ -9,7 +11,6 @@ python:
     - "nightly"
 
 env:
-    - DJANGO_VERSION=1.7.11
     - DJANGO_VERSION=1.8.17
     - DJANGO_VERSION=1.9.12
     - DJANGO_VERSION=1.10.6
@@ -17,7 +18,13 @@ env:
 
 install:
     - pip install -q Django==$DJANGO_VERSION
-    - python setup.py -q install
+    - cp monkey_pdns/settings.example.py monkey_pdns/settings.py
+    - python manage.py migrate
 
-script: pytest
+script: 
+    - python manage.py test
+
+addons:
+    code_climate:
+        repo_token: 45e76e2a699f55c0ad633545d9588f0348e29bc55ab4c35a1075214f7f707198
 
