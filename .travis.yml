@@ -24,3 +24,7 @@ install:
 script: 
     - python manage.py test
 
+addons:
+    code_climate:
+        repo_token: 45e76e2a699f55c0ad633545d9588f0348e29bc55ab4c35a1075214f7f707198
+
