@@ -15,7 +15,9 @@ class Sub_Zone(models.Model):
     created = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return self.prefix + '.' + self.super_zone.name
+        if self.prefix == '@':
+            return str(self.super_zone)
+        return self.prefix + '.' + str(self.super_zone)
 
 class Record_Type(models.Model):
     name = models.CharField(max_length = 8)
@@ -32,6 +34,7 @@ class Record(models.Model):
     created = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
+        if self.prefix == '@':
+            return str(self.zone) + ' ' + str(self.type) + ' ' + self.context
         return self.prefix + '.' + str(self.zone) + ' ' + str(self.type) + ' ' + self.context
-
 

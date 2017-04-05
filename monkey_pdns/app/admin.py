@@ -15,14 +15,24 @@ class Record_Admin(admin.ModelAdmin):
         if request.user.is_superuser:
             return query
 
-        return query.filter(zone__owner=request.user)
+        return query.filter(zone__owner = request.user)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'zone':
             kwargs['queryset'] = Sub_Zone.objects.filter(owner=request.user)
         return super(Record_Admin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-admin.site.register(Zone)
+class Zone_Admin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        obj.save()
+        sub_obj = Sub_Zone(
+            owner = request.user,
+            prefix = '@',
+            super_zone = obj
+        )
+        sub_obj.save()
+
+admin.site.register(Zone, Zone_Admin)
 admin.site.register(Sub_Zone)
 admin.site.register(Record, Record_Admin)
 admin.site.register(Record_Type)
