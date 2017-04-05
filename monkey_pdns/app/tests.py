@@ -6,7 +6,7 @@ from .models import Zone, Sub_Zone, Record, Record_Type
 class View_hello_tests(TestCase):
 
     def test_hello(self):
-        response = self.client.get('/')
+        response = self.client.get('/hello/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Hello World!')
 
