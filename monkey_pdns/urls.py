@@ -19,7 +19,7 @@ from django.contrib import admin
 from monkey_pdns.app import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', views.hello),
+    url(r'^hello/$', views.hello),
+    url(r'^', admin.site.urls),
 ]
 
